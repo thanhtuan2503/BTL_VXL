@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        05/28/2021  14:54:37  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/28/2021  16:37:08  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -19,7 +19,7 @@ LINK MAP OF MODULE:  slave_2 (SLAVE_2)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     0078H     ABSOLUTE     
+            CODE    0000H     007AH     ABSOLUTE     
 
 
 
@@ -29,14 +29,18 @@ SYMBOL TABLE OF MODULE:  slave_2 (SLAVE_2)
   ----------------------------------
 
   -------         MODULE        SLAVE_2
-  C:005DH         SYMBOL        CHECK
-  C:0067H         SYMBOL        KT
-  C:0044H         SYMBOL        LOOP
+  C:0061H         SYMBOL        CHECK
+  B:00A8H.7       SYMBOL        EA
+  B:00A8H.4       SYMBOL        ES
+  C:0079H         SYMBOL        FN
+  C:006CH         SYMBOL        ISR_SPI
+  C:0069H         SYMBOL        KT
+  C:0048H         SYMBOL        LOOP
   C:0030H         SYMBOL        MAIN
-  C:0051H         SYMBOL        MOD_SL
+  C:0055H         SYMBOL        MOD_SL
   D:0090H         SYMBOL        P1
   D:00A0H         SYMBOL        P2
-  C:0068H         SYMBOL        PHAT
+  C:006FH         SYMBOL        PHAT
   B:0098H.2       SYMBOL        RB8
   B:0098H.0       SYMBOL        RI
   D:0099H         SYMBOL        SBUF
@@ -45,48 +49,50 @@ SYMBOL TABLE OF MODULE:  slave_2 (SLAVE_2)
   B:0098H.5       SYMBOL        SM2
   D:0081H         SYMBOL        SP
   D:008DH         SYMBOL        TH1
-  C:0070H         SYMBOL        THU
+  C:0075H         SYMBOL        THU
   B:0098H.1       SYMBOL        TI
   D:008BH         SYMBOL        TL1
   D:0089H         SYMBOL        TMOD
   B:0088H.6       SYMBOL        TR1
   C:0000H         LINE#         4
-  C:0030H         LINE#         7
-  C:0033H         LINE#         8
-  C:0036H         LINE#         9
-  C:0039H         LINE#         10
-  C:003CH         LINE#         11
-  C:003FH         LINE#         12
-  C:0041H         LINE#         13
-  C:0044H         LINE#         14
-BL51 BANKED LINKER/LOCATER V6.22                                                      05/28/2021  14:54:37  PAGE 2
+  C:0023H         LINE#         6
+  C:0030H         LINE#         9
+  C:0033H         LINE#         10
+  C:0036H         LINE#         11
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/28/2021  16:37:08  PAGE 2
 
 
-  C:0046H         LINE#         15
-  C:0048H         LINE#         16
-  C:004BH         LINE#         17
-  C:004DH         LINE#         18
-  C:004FH         LINE#         19
-  C:0051H         LINE#         20
-  C:0053H         LINE#         21
-  C:0055H         LINE#         22
-  C:0057H         LINE#         23
-  C:0059H         LINE#         24
-  C:005BH         LINE#         25
+  C:0039H         LINE#         12
+  C:003CH         LINE#         13
+  C:003FH         LINE#         14
+  C:0041H         LINE#         15
+  C:0043H         LINE#         16
+  C:0045H         LINE#         17
+  C:0048H         LINE#         18
+  C:004AH         LINE#         19
+  C:004CH         LINE#         20
+  C:004FH         LINE#         21
+  C:0051H         LINE#         22
+  C:0053H         LINE#         23
+  C:0055H         LINE#         24
+  C:0057H         LINE#         25
+  C:0059H         LINE#         26
+  C:005BH         LINE#         27
   C:005DH         LINE#         28
   C:005FH         LINE#         29
-  C:0062H         LINE#         30
-  C:0065H         LINE#         31
-  C:0067H         LINE#         32
-  C:0068H         LINE#         35
+  C:0061H         LINE#         32
+  C:0064H         LINE#         33
+  C:0067H         LINE#         34
+  C:0069H         LINE#         35
   C:006BH         LINE#         36
-  C:006DH         LINE#         37
-  C:006FH         LINE#         38
-  C:0070H         LINE#         40
-  C:0073H         LINE#         41
-  C:0075H         LINE#         42
-  C:0077H         LINE#         43
+  C:006CH         LINE#         38
+  C:006FH         LINE#         40
+  C:0071H         LINE#         41
+  C:0073H         LINE#         42
+  C:0075H         LINE#         43
+  C:0077H         LINE#         44
+  C:0079H         LINE#         45
   -------         ENDMOD        SLAVE_2
 
-Program Size: data=8.0 xdata=0 code=120
+Program Size: data=8.0 xdata=0 code=122
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
