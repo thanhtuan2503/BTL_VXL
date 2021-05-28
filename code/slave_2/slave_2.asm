@@ -1,0 +1,44 @@
+
+	 SLAV_1 EQU 31H
+	 ORG 0
+	 JMP MAIN
+	 ORG 0030H
+MAIN: 
+	 MOV SP,#5FH
+	 MOV SCON,#0F2H ;SPI mode 3 cho phép thu,TI=1
+	 MOV TMOD,#20H ;Timer1 tạo baudrate
+	 MOV TH1, #-3 ;BR=9600
+	 MOV TL1,TH1
+	 SETB TR1
+	 MOV P1, #0FFH
+LOOP:	 	SETB SM2
+			ACALL CHECK
+			JNB SM2, MOD_SL
+			MOV A, P1
+			MOV P2, A
+			SJMP LOOP
+MOD_SL:	 	ACALL THU
+			MOV P2, A
+			JZ LOOP
+			MOV A, P1
+			ACALL PHAT
+			SJMP MOD_SL
+
+
+CHECK:		ACALL THU
+			JNB RB8, KT
+			CJNE A, #SLAV_1, KT
+			CLR SM2
+KT:			RET
+
+PHAT:
+	 JNB TI,$
+	 CLR TI
+	 MOV SBUF,A
+	 RET
+THU:
+	 JNB RI,$
+	 CLR RI
+	 MOV A,SBUF
+	 RET
+END

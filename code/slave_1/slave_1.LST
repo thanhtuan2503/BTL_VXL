@@ -1,0 +1,94 @@
+A51 MACRO ASSEMBLER  SLAVE_1                                                              05/28/2021 16:34:43 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02b
+OBJECT MODULE PLACED IN slave_1.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE slave_1.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+  0030                 2              SLAV_0 EQU 30H
+0000                   3              ORG 0
+0000 020030            4              LJMP MAIN
+0023                   5              ORG 0023H
+0023 02006C            6              LJMP ISR_SPI
+0030                   7              ORG 0030H
+0030                   8     MAIN: 
+0030 75815F            9              MOV SP,#5FH
+0033 7598F2           10              MOV SCON,#0F2H ;SPI mode 3 cho phép thu,TI=1
+0036 758920           11              MOV TMOD,#20H ;Timer1 tạo baudrate
+0039 758DFD           12              MOV TH1, #-3 ;BR=9600
+003C 858D8B           13              MOV TL1,TH1
+003F D28E             14              SETB TR1
+0041 D2AF             15              SETB EA
+0043 D2AC             16              SETB ES
+0045 7590FF           17              MOV P1, #0FFH
+0048 D29D             18     LOOP:           SETB SM2
+004A 1161             19                             ACALL CHECK
+004C 309D06           20                             JNB SM2, MOD_SL
+004F E590             21                             MOV A, P1
+0051 F5A0             22                             MOV P2, A
+0053 80F3             23                             SJMP LOOP
+0055 1175             24     MOD_SL:         ACALL THU
+0057 F5A0             25                             MOV P2, A
+0059 60ED             26                             JZ LOOP
+005B E590             27                             MOV A, P1
+005D 116F             28                             ACALL PHAT
+005F 80F4             29                             SJMP MOD_SL
+                      30     
+                      31     
+0061 309A05           32     CHECK:          JNB RB8, KT
+0064 B43002           33                             CJNE A, #SLAV_0, KT
+0067 C29D             34                             CLR SM2
+0069 C29A             35     KT:                     CLR RB8
+006B 22               36                             RET
+                      37     
+006C 309906           38     ISR_SPI:        JNB TI, THU 
+006F                  39     PHAT:
+006F C299             40              CLR TI
+0071 F599             41              MOV SBUF,A
+0073 8004             42              SJMP FN
+0075 E599             43     THU: MOV A,SBUF
+0077 C298             44              CLR RI
+0079 32               45     FN:      RETI
+                      46     END
+A51 MACRO ASSEMBLER  SLAVE_1                                                              05/28/2021 16:34:43 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CHECK. . . . . . .  C ADDR   0061H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ES . . . . . . . .  B ADDR   00A8H.4 A   
+FN . . . . . . . .  C ADDR   0079H   A   
+ISR_SPI. . . . . .  C ADDR   006CH   A   
+KT . . . . . . . .  C ADDR   0069H   A   
+LOOP . . . . . . .  C ADDR   0048H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+MOD_SL . . . . . .  C ADDR   0055H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+PHAT . . . . . . .  C ADDR   006FH   A   
+RB8. . . . . . . .  B ADDR   0098H.2 A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SLAV_0 . . . . . .  N NUMB   0030H   A   
+SM2. . . . . . . .  B ADDR   0098H.5 A   
+SP . . . . . . . .  D ADDR   0081H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+THU. . . . . . . .  C ADDR   0075H   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,98 @@
+A51 MACRO ASSEMBLER  MASTER                                                               05/28/2021 16:03:40 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02b
+OBJECT MODULE PLACED IN master.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE master.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+  00B2                 1             SELECT BIT P3.2
+  0030                 2              SLAV_0 EQU 30H
+  0031                 3              SLAV_1 EQU 31H
+0000                   4              ORG 0
+0000 802E              5              JMP MAIN
+0030                   6              ORG 0030H
+0030                   7     MAIN: 
+0030 75815F            8              MOV SP,#5FH
+0033 759872            9              MOV SCON,#72H ;SPI mode 3 cho phép thu,TI=1
+0036 758920           10              MOV TMOD,#20H ;Timer1 tạo baudrate
+0039 758DFD           11              MOV TH1,#-3 ;BR=9600
+003C 858D8B           12              MOV TL1,TH1
+003F D28E             13              SETB TR1
+0041                  14     Loop:
+0041 20B219           15              JB SELECT,SEL1 ;SELECT=1,chọn slaver1
+0044 7430             16              MOV A,#SLAV_0 ;nạp địa chỉ slaver0
+0046 D29D             17              SETB SM2 ;SM2=1 để thu mã lệnh từ slaver được chọn 
+0048 D29B             18              SETB TB8 ;truyền mã lệnh 
+004A 1171             19              ACALL PHAT ;phát địa chỉ slaver cần chọn
+004C E4               20              CLR A ;xóa A
+004D 1179             21              ACALL THU ;thu địa chỉ slaver được chọn CJNE A,#SLAV_0,Loop ;kiểm tra
+                              đúng địa chỉ?
+004F C29D             22              CLR SM2 ;đúng địa chỉ CLR TB8 ;chuẩn bị truyền data
+0051                  23     TIEP:
+0051 E590             24              MOV A,P1 ;nhập data từ P1
+0053 1171             25              ACALL PHAT ;phát data
+0055 60EA             26              JZ Loop ;data=#0,ngừng truyền quay về từ đầu
+0057 1179             27              ACALL THU ;thu data từ slaver
+0059 F5A0             28              MOV P2,A ;xuất data thu được ra P2
+005B 80F4             29              JMP TIEP ;lặp vòng truyền tiếp
+005D                  30     SEL1:
+005D 7431             31              MOV A,#SLAV_1 ;nạp địa chỉ slaver1
+005F D29D             32              SETB SM2 ;SM2=1 để thu mã lệnh từ slaver được chọn
+0061 D29B             33              SETB TB8 ;truyền mã lệnh
+0063 1171             34              ACALL PHAT ; phát địa chỉ slaver cần chọn
+0065 E4               35              CLR A ;xóa A
+0066 1179             36              ACALL THU ; thu địa chỉ slaver được chọn
+0068 B431D6           37              CJNE A,#SLAV_1,Loop ; kiểm tra đúng địa chỉ?
+006B C29D             38              CLR SM2 ;đúng địa chỉ
+006D C29B             39              CLR TB8 ; chuẩn bị truyền data
+006F 80E0             40              JMP TIEP ;nhảy đến truyền data
+0071                  41     PHAT:
+0071 3099FD           42              JNB TI,$
+0074 C299             43              CLR TI
+0076 F599             44              MOV SBUF,A
+0078 22               45              RET
+0079                  46     THU:
+0079 3098FD           47              JNB RI,$
+007C C298             48              CLR RI
+007E E599             49              MOV A,SBUF
+0080 22               50              RET
+                      51     END
+A51 MACRO ASSEMBLER  MASTER                                                               05/28/2021 16:03:40 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+LOOP . . . . . . .  C ADDR   0041H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+PHAT . . . . . . .  C ADDR   0071H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SEL1 . . . . . . .  C ADDR   005DH   A   
+SELECT . . . . . .  B ADDR   00B0H.2 A   
+SLAV_0 . . . . . .  N NUMB   0030H   A   
+SLAV_1 . . . . . .  N NUMB   0031H   A   
+SM2. . . . . . . .  B ADDR   0098H.5 A   
+SP . . . . . . . .  D ADDR   0081H   A   
+TB8. . . . . . . .  B ADDR   0098H.3 A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+THU. . . . . . . .  C ADDR   0079H   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TIEP . . . . . . .  C ADDR   0051H   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
