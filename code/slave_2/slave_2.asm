@@ -1,0 +1,52 @@
+
+SLAV_2 EQU 32H
+ORG 0000H
+LJMP MAIN
+
+ORG 0030H
+MAIN: 
+    MOV TMOD, #20H
+    MOV TL1, #-3
+    MOV TH1, #-3
+    MOV SCON, #0D2H
+	SETB TR1
+    SETB TB8
+    MOV P1, #0FFH
+    MOV P2, #0FFH
+    CLR F0
+N_COM:
+    CLR SM2
+COM:
+    ACALL THU
+    JZ N_COM
+    JNB RB8, DT
+    CJNE A, #SLAV_2, MUT
+    SETB SM2
+    MOV A, #SLAV_2
+    ACALL PHAT
+DT: 
+    JNB SM2, MUT
+	ACALL THU
+    MOV P2, A
+    JZ N_COM
+    MOV A, P1
+    ACALL PHAT
+    SJMP DT
+MUT:
+    MOV A, P1
+    MOV P2, A
+    SJMP COM
+
+PHAT:
+    JNB TI,$
+    CLR TI
+    MOV SBUF,A
+    RET
+
+THU:
+    JNB RI,$
+    MOV A,SBUF
+    CLR RI
+    RET
+
+END

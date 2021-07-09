@@ -1,0 +1,96 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        07/09/2021  22:20:20  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE slave_1.obj TO slave_1
+
+
+INPUT MODULES INCLUDED:
+  slave_1.obj (SLAVE_1)
+
+
+LINK MAP OF MODULE:  slave_1 (SLAVE_1)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     007FH     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  slave_1 (SLAVE_1)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SLAVE_1
+  C:004AH         SYMBOL        COM
+  C:005AH         SYMBOL        DT
+  B:00D0H.5       SYMBOL        F0
+  C:0030H         SYMBOL        MAIN
+  C:0069H         SYMBOL        MUT
+  C:0048H         SYMBOL        N_COM
+  D:0090H         SYMBOL        P1
+  D:00A0H         SYMBOL        P2
+  C:006FH         SYMBOL        PHAT
+  B:0098H.2       SYMBOL        RB8
+  B:0098H.0       SYMBOL        RI
+  D:0099H         SYMBOL        SBUF
+  D:0098H         SYMBOL        SCON
+  N:0031H         SYMBOL        SLAV_1
+  B:0098H.5       SYMBOL        SM2
+  B:0098H.3       SYMBOL        TB8
+  D:008DH         SYMBOL        TH1
+  C:0077H         SYMBOL        THU
+  B:0098H.1       SYMBOL        TI
+  D:008BH         SYMBOL        TL1
+  D:0089H         SYMBOL        TMOD
+  B:0088H.6       SYMBOL        TR1
+  C:0000H         LINE#         4
+  C:0030H         LINE#         8
+  C:0033H         LINE#         9
+  C:0036H         LINE#         10
+  C:0039H         LINE#         11
+  C:003CH         LINE#         12
+  C:003EH         LINE#         13
+  C:0040H         LINE#         14
+BL51 BANKED LINKER/LOCATER V6.22                                                      07/09/2021  22:20:20  PAGE 2
+
+
+  C:0043H         LINE#         15
+  C:0046H         LINE#         16
+  C:0048H         LINE#         18
+  C:004AH         LINE#         20
+  C:004CH         LINE#         21
+  C:004EH         LINE#         22
+  C:0051H         LINE#         23
+  C:0054H         LINE#         24
+  C:0056H         LINE#         25
+  C:0058H         LINE#         26
+  C:005AH         LINE#         28
+  C:005DH         LINE#         29
+  C:005FH         LINE#         30
+  C:0061H         LINE#         31
+  C:0063H         LINE#         32
+  C:0065H         LINE#         33
+  C:0067H         LINE#         34
+  C:0069H         LINE#         36
+  C:006BH         LINE#         37
+  C:006DH         LINE#         38
+  C:006FH         LINE#         41
+  C:0072H         LINE#         42
+  C:0074H         LINE#         43
+  C:0076H         LINE#         44
+  C:0077H         LINE#         47
+  C:007AH         LINE#         48
+  C:007CH         LINE#         49
+  C:007EH         LINE#         50
+  -------         ENDMOD        SLAVE_1
+
+Program Size: data=8.0 xdata=0 code=127
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

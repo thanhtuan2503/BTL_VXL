@@ -1,0 +1,67 @@
+SELECT BIT P3.2
+SLAV_1 EQU 31H
+SLAV_2 EQU 32H
+ORG 0000H
+LJMP MAIN
+
+ORG 0030H
+MAIN: 
+    MOV TMOD, #20H
+    MOV TL1, #-3
+    MOV TH1, #-3
+    MOV SCON, #0D2H
+	SETB TR1
+    SETB TB8
+    SETB SM2
+    MOV P1, #0FFH
+    MOV P2, #0FFH
+COMPARE:
+    JB P3.2, SL2
+ SL1: 
+    SETB TB8
+    SETB SM2
+    MOV A, #SLAV_1
+    ACALL PHAT
+    MOV A, P1
+    JZ COMPARE    
+    ACALL THU
+    CLR TB8
+    CLR SM2
+    CJNE A, #SLAV_1, COMPARE
+
+TRANS: 
+    SETB TB8
+    SETB SM2
+    MOV A, P1
+    ACALL PHAT
+    JZ COMPARE
+    ACALL THU  
+    CLR TB8
+    CLR SM2
+    MOV P2, A
+    SJMP TRANS
+
+SL2:
+    SETB TB8
+    SETB SM2
+    MOV A, #SLAV_2
+    ACALL PHAT
+    ACALL THU
+    CLR TB8
+    CLR SM2
+    CJNE A, #SLAV_2, COMPARE
+    SJMP TRANS
+
+PHAT:
+    JNB TI,$
+    CLR TI
+    MOV SBUF,A
+    RET
+
+THU:
+    JNB RI,$
+    MOV A,SBUF
+    CLR RI
+    RET
+
+END

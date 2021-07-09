@@ -1,0 +1,115 @@
+A51 MACRO ASSEMBLER  MASTER                                                               07/09/2021 22:57:09 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02b
+OBJECT MODULE PLACED IN master.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE master.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+  00B2                 1     SELECT BIT P3.2
+  0031                 2     SLAV_1 EQU 31H
+  0032                 3     SLAV_2 EQU 32H
+0000                   4     ORG 0000H
+0000 020030            5     LJMP MAIN
+                       6     
+0030                   7     ORG 0030H
+0030                   8     MAIN: 
+0030 758920            9         MOV TMOD, #20H
+0033 758BFD           10         MOV TL1, #-3
+0036 758DFD           11         MOV TH1, #-3
+0039 7598D2           12         MOV SCON, #0D2H
+003C D28E             13             SETB TR1
+003E D29B             14         SETB TB8
+0040 D29D             15         SETB SM2
+0042 7590FF           16         MOV P1, #0FFH
+0045 75A0FF           17         MOV P2, #0FFH
+0048                  18     COMPARE:
+0048 20B229           19         JB P3.2, SL2
+004B                  20      SL1: 
+004B D29B             21         SETB TB8
+004D D29D             22         SETB SM2
+004F 7431             23         MOV A, #SLAV_1
+0051 1187             24         ACALL PHAT
+0053 E590             25         MOV A, P1
+0055 60F1             26         JZ COMPARE    
+0057 118F             27         ACALL THU
+0059 C29B             28         CLR TB8
+005B C29D             29         CLR SM2
+005D B431E8           30         CJNE A, #SLAV_1, COMPARE
+                      31     
+0060                  32     TRANS: 
+0060 D29B             33         SETB TB8
+0062 D29D             34         SETB SM2
+0064 E590             35         MOV A, P1
+0066 1187             36         ACALL PHAT
+0068 60DE             37         JZ COMPARE
+006A 118F             38         ACALL THU  
+006C C29B             39         CLR TB8
+006E C29D             40         CLR SM2
+0070 F5A0             41         MOV P2, A
+0072 80EC             42         SJMP TRANS
+                      43     
+0074                  44     SL2:
+0074 D29B             45         SETB TB8
+0076 D29D             46         SETB SM2
+0078 7432             47         MOV A, #SLAV_2
+007A 1187             48         ACALL PHAT
+007C 118F             49         ACALL THU
+007E C29B             50         CLR TB8
+0080 C29D             51         CLR SM2
+0082 B432C3           52         CJNE A, #SLAV_2, COMPARE
+0085 80D9             53         SJMP TRANS
+                      54     
+0087                  55     PHAT:
+0087 3099FD           56         JNB TI,$
+008A C299             57         CLR TI
+008C F599             58         MOV SBUF,A
+A51 MACRO ASSEMBLER  MASTER                                                               07/09/2021 22:57:09 PAGE     2
+
+008E 22               59         RET
+                      60     
+008F                  61     THU:
+008F 3098FD           62         JNB RI,$
+0092 E599             63         MOV A,SBUF
+0094 C298             64         CLR RI
+0096 22               65         RET
+                      66     
+                      67     END
+A51 MACRO ASSEMBLER  MASTER                                                               07/09/2021 22:57:09 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+COMPARE. . . . . .  C ADDR   0048H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+PHAT . . . . . . .  C ADDR   0087H   A   
+RI . . . . . . . .  B ADDR   0098H.0 A   
+SBUF . . . . . . .  D ADDR   0099H   A   
+SCON . . . . . . .  D ADDR   0098H   A   
+SELECT . . . . . .  B ADDR   00B0H.2 A   
+SL1. . . . . . . .  C ADDR   004BH   A   
+SL2. . . . . . . .  C ADDR   0074H   A   
+SLAV_1 . . . . . .  N NUMB   0031H   A   
+SLAV_2 . . . . . .  N NUMB   0032H   A   
+SM2. . . . . . . .  B ADDR   0098H.5 A   
+TB8. . . . . . . .  B ADDR   0098H.3 A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+THU. . . . . . . .  C ADDR   008FH   A   
+TI . . . . . . . .  B ADDR   0098H.1 A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+TRANS. . . . . . .  C ADDR   0060H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
